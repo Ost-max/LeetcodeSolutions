@@ -14,7 +14,7 @@ public interface FuncInterfaceTest {
     }
 
     static String test(String a, String b) {
-        return a + test(a);
+        return a + b;
     }
 
 }
