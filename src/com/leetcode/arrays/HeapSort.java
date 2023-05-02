@@ -1,5 +1,7 @@
 package com.leetcode.arrays;
 
+import java.util.Arrays;
+
 public class HeapSort implements ArraySort {
 
     @Override
@@ -8,6 +10,18 @@ public class HeapSort implements ArraySort {
         // Build heap (rearrange array)
         for (int i = N / 2 - 1; i >= 0; i--) {
             heapify(arr, N, i);
+        }
+
+        System.out.println(Arrays.toString(arr));
+
+        for (int i = N - 1; i > 0; i--) {
+            // Move current root to end
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+
+            // call max heapify on the reduced heap
+            heapify(arr, i, 0);
         }
     }
 
@@ -22,7 +36,6 @@ public class HeapSort implements ArraySort {
         if (l < N && arr[l] > arr[largest]) {
             largest = l;
         }
-
 
         // If right child is larger than largest so far
         if (r < N && arr[r] > arr[largest])
