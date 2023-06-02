@@ -24,7 +24,7 @@ public class BinarySearch implements FuncInterfaceTest, FuncInterfaceTestTwo {
 
     private static int binarySearch(int[] arr,int leftIndex, int rightIndex,   int searchEl) {
         int middleIndex = (rightIndex + leftIndex)/ 2;
-        if(rightIndex < leftIndex || arr.length <= middleIndex) {
+        if (rightIndex < leftIndex || arr.length <= middleIndex) {
             return -1;
         }
         int middleEl = arr[middleIndex];
