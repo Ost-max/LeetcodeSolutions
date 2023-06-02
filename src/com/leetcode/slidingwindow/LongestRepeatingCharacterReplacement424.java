@@ -6,11 +6,13 @@ import java.util.stream.Collectors;
 public class LongestRepeatingCharacterReplacement424 {
 
     public static void main(String[] args) {
+
+        System.out.println(new LongestRepeatingCharacterReplacement424().characterReplacement3("AAABBBAAAA", 2)); // 6
+        System.out.println(new LongestRepeatingCharacterReplacement424().characterReplacement3("ABCCDEEKKKOOKKOK", 2)); // 7
         System.out.println(new LongestRepeatingCharacterReplacement424().characterReplacement3("ABAB", 2)); // 4
         System.out.println(new LongestRepeatingCharacterReplacement424().characterReplacement3("AABABBA", 1)); // 4
         System.out.println(new LongestRepeatingCharacterReplacement424().characterReplacement3("ABBB", 2)); // 4
         System.out.println(new LongestRepeatingCharacterReplacement424().characterReplacement3("ABAA", 0)); // 2
-        System.out.println(new LongestRepeatingCharacterReplacement424().characterReplacement3("ABCCDEEKKKOOKKOK", 2)); // 7
         System.out.println(new LongestRepeatingCharacterReplacement424().characterReplacement3("AAAA", 2)); // 4
         System.out.println(new LongestRepeatingCharacterReplacement424().characterReplacement3("AAAB", 0)); // 3
         System.out.println(new LongestRepeatingCharacterReplacement424().characterReplacement3("AABA", 0)); // 2
