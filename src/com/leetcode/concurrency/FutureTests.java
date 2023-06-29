@@ -1,13 +1,49 @@
 package com.leetcode.concurrency;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.*;
 
 public class FutureTests {
 
-    final ExecutorService executorService = Executors.newFixedThreadPool(3);
+    final ExecutorService executorService = Executors.newCachedThreadPool();
     final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+
+    private ForkJoinPool executor = new ForkJoinPool();
+
+    class Action extends RecursiveAction {
+
+
+        private int n;
+
+        private Runnable action;
+
+        public Action(Runnable action, int n) {
+            this.action = action;
+            this.n = n;
+        }
+
+        @Override
+        protected void compute() {
+            System.out.println("Thread name " + Thread.currentThread().getName() + " n: " + n + "Time  " + LocalDateTime.now().getSecond());
+            if(n <= 0 ) {
+                action.run();
+            }
+            Action subtask = new Action(action, n--);
+            subtask.fork();
+            subtask.join();
+        }
+    }
+    public void execute(Runnable action, int nTimes) {
+        for (int i =0; i<nTimes; i++) {
+            Action forkAction =  new Action(action, nTimes);
+            executor.invoke(forkAction.fork());
+        }
+    }
+
+
+
 
     public static void main(String ...args) {
         new FutureTests().test();
@@ -43,6 +79,7 @@ public class FutureTests {
         Future<BigInteger> f = executorService.submit(() -> BigInteger.ONE.add(BigInteger.ONE));
         try {
             System.out.println(f.get());
+
             executorService.shutdown();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();

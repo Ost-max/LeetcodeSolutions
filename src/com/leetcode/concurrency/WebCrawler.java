@@ -22,6 +22,7 @@ class WebCrawler {
 
 
         try {
+            ForkJoinPool forkJoinPool = new ForkJoinPool();
             return  executorService.submit(() -> new ArrayList<String>(crawl(startUrl, startUrl, htmlParser, new HashSet<String>()))).get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
